@@ -5,7 +5,7 @@
     "description": "A simple API to create, read, update and delete books. Readers can view and rate books.",
     "version": "1.0.0"
   },
-  "host": "auto-mart-api.herokuapp.com",
+  "host": "https://pureheart-bookstore.herokuapp.com",
   "basePath": "/api/v1",
   "schemes": [
     "https"
