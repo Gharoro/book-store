@@ -22,12 +22,6 @@ require('./config/dbconnection');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use((request, response, next) => {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
 // Route Files
 const auth = require('./routes/api/v1/auth');
 const book = require('./routes/api/v1/book');

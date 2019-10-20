@@ -5,11 +5,9 @@
     "description": "A simple API to create, read, update and delete books. Readers can view and rate books.",
     "version": "1.0.0"
   },
-  "host": "https://pureheart-bookstore.herokuapp.com",
+  "host": "pureheart-bookstore.herokuapp.com",
   "basePath": "/api/v1",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "tags": [
     {
       "name": "Auth"
@@ -138,12 +136,8 @@
     "/auth/signup": {
       "post": {
         "description": "Registers a new user.",
-        "tags": [
-          "Auth"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
+        "tags": ["Auth"],
+        "consumes": ["application/x-www-form-urlencoded"],
         "parameters": [
           {
             "in": "body",
@@ -177,9 +171,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -193,22 +185,15 @@
     "/auth/signin": {
       "post": {
         "description": "Login a user.",
-        "tags": [
-          "Auth"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
+        "tags": ["Auth"],
+        "consumes": ["application/x-www-form-urlencoded"],
         "parameters": [
           {
             "in": "body",
             "name": "Login Credentials",
             "schema": {
               "type": "object",
-              "required": [
-                "email",
-                "password"
-              ],
+              "required": ["email", "password"],
               "properties": {
                 "email": {
                   "type": "string"
@@ -220,9 +205,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -236,12 +219,8 @@
     "/book": {
       "get": {
         "description": "View all books.",
-        "tags": [
-          "Books"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Books"],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -255,9 +234,7 @@
     "/book/{book_id}": {
       "get": {
         "description": "View a specific book matching the id.",
-        "tags": [
-          "Books"
-        ],
+        "tags": ["Books"],
         "parameters": [
           {
             "name": "book_id",
@@ -267,9 +244,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -288,12 +263,8 @@
           }
         ],
         "description": "Adds a new book to the store.",
-        "tags": [
-          "Books"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
+        "tags": ["Books"],
+        "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "formData",
@@ -332,9 +303,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK",
@@ -356,12 +325,8 @@
           }
         ],
         "description": "Updates a listed book.",
-        "tags": [
-          "Books"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
+        "tags": ["Books"],
+        "consumes": ["application/x-www-form-urlencoded"],
         "parameters": [
           {
             "name": "book_id",
@@ -395,9 +360,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -413,9 +376,7 @@
           }
         ],
         "description": "Deletes a book.",
-        "tags": [
-          "Books"
-        ],
+        "tags": ["Books"],
         "parameters": [
           {
             "name": "book_id",
@@ -425,9 +386,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -443,12 +402,8 @@
           }
         ],
         "description": "Rates a book (1 - 5).",
-        "tags": [
-          "Rating"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
+        "tags": ["Rating"],
+        "consumes": ["application/x-www-form-urlencoded"],
         "parameters": [
           {
             "in": "path",
@@ -463,9 +418,7 @@
             "description": "Enter rating value.",
             "schema": {
               "type": "object",
-              "required": [
-                "rating_num"
-              ],
+              "required": ["rating_num"],
               "properties": {
                 "rating_num": {
                   "type": "number"
@@ -474,9 +427,7 @@
             }
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
