@@ -7,6 +7,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+
+const auth = multer();
 const User = require('../../../models/User');
 
 
@@ -15,7 +18,7 @@ const router = express.Router();
 // @route   POST api/v1/auth/signup
 // @desc    Create user account
 // @access  Public
-router.post('/signup', (req, res) => {
+router.post('/signup', auth.none(), (req, res) => {
   const { first_name, last_name, email, password, confirm_password } = req.body;
   User.findOne({ email }).then((user) => {
     if (user) {
@@ -56,7 +59,7 @@ router.post('/signup', (req, res) => {
 // @route   POST api/auth/signin
 // @desc    Login a user / Returning JWT Token
 // @access  Public
-router.post('/signin', (req, res) => {
+router.post('/signin', auth.none(), (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ status: 400, error: 'Please enter a valid email and password' });

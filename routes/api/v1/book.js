@@ -8,6 +8,9 @@ const express = require('express');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const cloudinary = require('cloudinary');
+const multer = require('multer');
+
+const data = multer();
 
 const Book = require('../../../models/Book');
 const User = require('../../../models/User');
@@ -119,7 +122,7 @@ router.get('/:book_id', (req, res) => {
 // @route   PATCH /:book_id
 // @desc    Update a book
 // @access  Private
-router.patch('/:book_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.patch('/:book_id', data.none(), passport.authenticate('jwt', { session: false }), (req, res) => {
   const { book_id } = req.params;
   let { title, description, author, publisher, genre } = req.body;
   const current_user_id = req.user.id;
