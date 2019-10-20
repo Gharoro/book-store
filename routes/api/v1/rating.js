@@ -9,8 +9,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const multer = require('multer');
 
-const num = multer();
-
+const data = multer();
 const Rating = require('../../../models/Rating');
 const Book = require('../../../models/Book');
 
@@ -20,7 +19,7 @@ const router = express.Router();
 // @route   POST /rating
 // @desc    Add a rating for a book
 // @access  Private
-router.post('/:book_id', num.none(), passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/:book_id', data.none(), passport.authenticate('jwt', { session: false }), (req, res) => {
   const { rating_num } = req.body;
   const { book_id } = req.params;
   const rater_id = req.user.id;
@@ -46,7 +45,7 @@ router.post('/:book_id', num.none(), passport.authenticate('jwt', { session: fal
       book.save().then(() => {
         newRating.save().then(() => res.status(200).json({
           status: 200,
-          message: 'Thank you for your rating.',
+          message: 'Thank you for rating this book.',
         })).catch(() => res.status(400).json({ status: 400, error: 'Unable to rate book at the moment' }));
       }).catch((err) => res.status(400).json({ status: 400, error: err }));
     });

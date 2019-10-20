@@ -11,7 +11,7 @@ const ratingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  value: {
+  rating_num: {
     type: Number,
     required: true
   },
