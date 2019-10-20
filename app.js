@@ -4,6 +4,8 @@ const express = require('express');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 const app = express();
 
@@ -33,6 +35,9 @@ require('./config/passport')(passport);
 app.get('/', (req, res) => {
   res.send('Book Store API');
 });
+
+// API Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Use Routes
 app.use('/api/v1/auth', auth);
