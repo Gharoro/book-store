@@ -404,7 +404,7 @@
         ],
         "description": "Rates a book (1 - 5).",
         "tags": ["Rating"],
-        "consumes": ["application/x-www-form-urlencoded"],
+        "consumes": ["multipart/form-data"],
         "parameters": [
           {
             "in": "path",
@@ -414,18 +414,10 @@
             "required": true
           },
           {
-            "in": "body",
-            "name": "Rating",
-            "description": "Enter rating value.",
-            "schema": {
-              "type": "object",
-              "required": ["rating_num"],
-              "properties": {
-                "rating_num": {
-                  "type": "number"
-                }
-              }
-            }
+            "in": "formData",
+            "name": "rating_num",
+            "type": "number",
+            "required": true
           }
         ],
         "produces": ["application/json"],

@@ -7,6 +7,9 @@
 const express = require('express');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const multer = require('multer');
+
+const num = multer();
 
 const Rating = require('../../../models/Rating');
 const Book = require('../../../models/Book');
@@ -17,7 +20,7 @@ const router = express.Router();
 // @route   POST /rating
 // @desc    Add a rating for a book
 // @access  Private
-router.post('/:book_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/:book_id', num.none(), passport.authenticate('jwt', { session: false }), (req, res) => {
   const { rating_num } = req.body;
   const { book_id } = req.params;
   const rater_id = req.user.id;
