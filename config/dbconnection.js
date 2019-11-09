@@ -20,7 +20,7 @@ function connect() {
         resolve();
       });
     } else if (process.env.NODE_ENV === 'development') {
-      mongoose.connect('mongodb://localhost:27017/book-store', {
+      mongoose.connect(process.env.DEV_MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
