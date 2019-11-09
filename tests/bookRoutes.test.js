@@ -9,7 +9,6 @@ const db = require('../config/dbconnection');
 const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYzJjODk0OTI2OGMzMWJiMDU4MzAyYSIsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiRG9lIiwiZW1haWwiOiJqb2huZG9lQGVtYWlsLmNvbSIsImlhdCI6MTU3MzMxODcwMCwiZXhwIjoxNTk0OTE4NzAwfQ.R0B4kIhDX9PJSJIPohFTT9Lv8gP0AAjKNXVOCZYE16Y';
 
 beforeEach(() => {
-  // db.dropCollection();
   jest.setTimeout(120000);
   db.connect();
 });
