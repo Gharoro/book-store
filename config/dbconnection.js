@@ -10,7 +10,7 @@ const NODE_ENV = 'test';
 function connect() {
   return new Promise((resolve, reject) => {
     if (NODE_ENV === 'test') {
-      mongoose.connect('mongodb://localhost:27017/test', {
+      mongoose.connect(process.env.PROD_MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
