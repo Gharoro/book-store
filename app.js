@@ -16,7 +16,9 @@ app.use(cors());
 require('dotenv').config();
 
 // Database connection
-require('./config/dbconnection');
+const db = require('./config/dbconnection');
+
+db.connect();
 
 // Body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +35,10 @@ require('./config/passport')(passport);
 
 // Home Page
 app.get('/', (req, res) => {
-  res.send('Book Store API');
+  res.status(200).json({
+    status: 200,
+    message: 'Welcome to the Book store API',
+  });
 });
 
 // API Documentation
@@ -45,4 +50,6 @@ app.use('/api/v1/book', book);
 app.use('/api/v1/rating', rating);
 
 const port = process.env.PORT || 2000;
-app.listen(port, () => console.log(`App running on port ${port}`));
+const server = app.listen(port, () => console.log(`App running on port ${port}`));
+
+module.exports = { app, server };

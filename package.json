@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint"
+    "test": "jest",
+    "lint": "eslint",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
   "author": "Gharoro Pureheart",
   "license": "ISC",
@@ -16,9 +17,12 @@
     "body-parser": "^1.19.0",
     "cloudinary": "^1.16.0",
     "cors": "^2.8.5",
+    "coveralls": "^3.0.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mock-mongoose": "^7.4.0-r2",
+    "mockgoose": "^8.0.3",
     "mongoose": "^5.7.5",
     "multer": "^1.4.2",
     "multer-storage-cloudinary": "^2.2.1",
@@ -29,6 +33,29 @@
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.9.0",
+    "jest-html-reporter": "^2.7.0",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "Test Report"
+        }
+      ]
+    ]
   }
 }

@@ -49,7 +49,8 @@ router.post('/', parser.single('image'), passport.authenticate('jwt', { session:
     user.save().then(() => {
       newBook.save().then((book) => res.status(200).json({
         status: 200,
-        added_book: book,
+        message: 'Book successfuly added',
+        book,
       })).catch(() => res.status(400).json({
         status: 400,
         error: 'Unable to add book at the moment',
@@ -78,6 +79,7 @@ router.get('/', (req, res) => {
     if (books.length > 0) {
       return res.status(200).json({
         status: 200,
+        message: 'success',
         books,
       });
     }
@@ -112,6 +114,7 @@ router.get('/:book_id', (req, res) => {
     if (book.length > 0) {
       return res.status(200).json({
         status: 200,
+        message: 'Book found',
         book,
       });
     }

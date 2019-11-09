@@ -1,22 +1,59 @@
+/* eslint-disable global-require */
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /* eslint-disable comma-dangle */
 const mongoose = require('mongoose');
+const Book = require('../models/Book');
 
-if (process.env.NODE_ENV === 'development') {
-  mongoose.connect(process.env.DEV_MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  });
-} else {
-  mongoose.connect(process.env.PROD_MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+const NODE_ENV = 'test';
+
+function connect() {
+  return new Promise((resolve, reject) => {
+    if (NODE_ENV === 'test') {
+      mongoose.connect('mongodb://localhost:27017/test', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+      }).then((res, err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    } else if (process.env.NODE_ENV === 'development') {
+      mongoose.connect('mongodb://localhost:27017/book-store', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+      }).then((res, err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+      mongoose.connection
+        .once('open', () => console.log('Connected to database...'))
+        .on('error', (error) => console.log('Error connecting to database!', error));
+    } else {
+      mongoose.connect(process.env.PROD_MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+      }).then((res, err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    }
   });
 }
 
-mongoose.connection
-  .once('open', () => console.log('Connected to database...'))
-  .on('error', (err) => {
-    console.log('Error connecting to database!', err);
-  });
+function close() {
+  return mongoose.disconnect();
+}
+
+function dropCollection() {
+  Book.deleteMany({}).then(() => {
+    console.log('Collection dropped');
+  }).catch((err) => console.log(err));
+}
+
+module.exports = { connect, close, dropCollection };
