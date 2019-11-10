@@ -6,7 +6,7 @@ const request = require('supertest');
 const { app, server } = require('../app');
 const db = require('../config/dbconnection');
 
-const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYzJjODk0OTI2OGMzMWJiMDU4MzAyYSIsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiRG9lIiwiZW1haWwiOiJqb2huZG9lQGVtYWlsLmNvbSIsImlhdCI6MTU3MzMxODcwMCwiZXhwIjoxNTk0OTE4NzAwfQ.R0B4kIhDX9PJSJIPohFTT9Lv8gP0AAjKNXVOCZYE16Y';
+const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYzdkZDM1ZmE0ZWI0MWYwNGM2ZDY2ZiIsImZpcnN0X25hbWUiOiJKb2huIiwibGFzdF9uYW1lIjoiRG9lIiwiZW1haWwiOiJqb2huZG9lQGVtYWlsLmNvbSIsImlhdCI6MTU3MzM3OTU3MSwiZXhwIjoxNTk0OTc5NTcxfQ.QXFiZ9gPXpnKQZDThdXYWe-5lDYuAygu7RRU8wCtP6s';
 
 beforeEach(() => {
   jest.setTimeout(120000);
@@ -23,9 +23,9 @@ describe('Book Endpoints', () => {
     const res = await request(app)
       .post('/api/v1/book/')
       .set('Authorization', token)
-      .field('title', 'New Travis Book 33')
-      .field('description', 'Jest is cool')
-      .field('author', 'John Doey')
+      .field('title', 'New Travis Book')
+      .field('description', 'Travis is cool')
+      .field('author', 'John Doe')
       .field('publisher', 'MacMillian')
       .field('genre', 'comp sci')
       .attach('image', 'tests/attachments/birthday.jpg');
@@ -41,7 +41,7 @@ describe('Book Endpoints', () => {
   });
   // fetch single book
   it('should return a book matching the passed Id', async () => {
-    const book_id = '5dc2efd947c479249cd56432';
+    const book_id = '5dc7de96fa52be2c5cfe9a4f';
     const res = await request(app)
       .get(`/api/v1/book/${book_id}`);
     expect(res.statusCode).toBe(200);
@@ -50,7 +50,7 @@ describe('Book Endpoints', () => {
   });
   // update a book
   it('should update a book', async () => {
-    const book_id = '5dc2efd947c479249cd56432';
+    const book_id = '5dc7de96fa52be2c5cfe9a4f';
     const res = await request(app)
       .patch(`/api/v1/book/${book_id}`)
       .set('Authorization', token)
@@ -64,7 +64,7 @@ describe('Book Endpoints', () => {
   });
   // delete a book
   it('should delete a book', async () => {
-    const book_id = '5dc2ef8855522f2e702f760c';
+    const book_id = '5dc7dedb9fab8e24840dd66d';
     const res = await request(app)
       .delete(`/api/v1/book/${book_id}/delete`)
       .set('Authorization', token);

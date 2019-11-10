@@ -10,7 +10,7 @@ const NODE_ENV = 'test';
 function connect() {
   return new Promise((resolve, reject) => {
     if (NODE_ENV === 'test') {
-      mongoose.connect(process.env.PROD_MONGO_URI, {
+      mongoose.connect('mongodb+srv://pureheart:jesus4ever@cluster0-xxo8o.mongodb.net/test', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -19,6 +19,9 @@ function connect() {
         if (err) return reject(err);
         resolve();
       });
+      mongoose.connection
+        .once('open', () => console.log('Connected to test database...'))
+        .on('error', (error) => console.log('Error connecting to database!', error));
     } else if (process.env.NODE_ENV === 'development') {
       mongoose.connect(process.env.DEV_MONGO_URI, {
         useNewUrlParser: true,
